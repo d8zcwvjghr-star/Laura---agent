@@ -21,7 +21,9 @@ jobs:
 
           req = urllib.request.Request(
               "https://api.openai.com/v1/models",
-              headers={"Authorization": "Bearer " + os.environ["OPENAI_API_KEY"]}
+              headers={
+                  "Authorization": "Bearer " + os.environ["OPENAI_API_KEY"]
+              }
           )
 
           with urllib.request.urlopen(req) as response:
