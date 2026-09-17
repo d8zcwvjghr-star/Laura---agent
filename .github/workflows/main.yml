@@ -11,22 +11,15 @@ jobs:
       - name: Checkout Laura
         uses: actions/checkout@v4
 
-      - name: Test OpenAI connection
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install OpenAI
+        run: pip install openai
+
+      - name: Run Laura
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          python - <<'PY'
-          import os
-          import urllib.request
-
-          req = urllib.request.Request(
-              "https://api.openai.com/v1/models",
-              headers={
-                  "Authorization": "Bearer " + os.environ["OPENAI_API_KEY"]
-              }
-          )
-
-          with urllib.request.urlopen(req) as response:
-              print("Laura connected to OpenAI successfully.")
-              print("HTTP status:", response.status)
-          PY
+        run: python laura.py
