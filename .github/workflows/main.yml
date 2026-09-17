@@ -1,0 +1,17 @@
+name: Laura Agent
+
+on:
+  workflow_dispatch:
+
+jobs:
+  laura:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Laura
+        uses: actions/checkout@v4
+
+      - name: Run Laura
+        run: |
+          echo "Laura is online."
+          echo "Personal digital agent initialized."
